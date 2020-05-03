@@ -1,6 +1,7 @@
 
-import 'package:fjut_qcx/goods/goods_router.dart';
-import 'package:fjut_qcx/order/order_router.dart';
+import 'package:fjut_qcx/article/articles_router.dart';
+import 'package:fjut_qcx/mine/mine_router.dart';
+import 'package:fjut_qcx/recruitment/recruitment_router.dart';
 import 'package:fluro/fluro.dart';
 import 'package:flutter/material.dart';
 import 'package:fjut_qcx/routers/404.dart';
@@ -39,8 +40,9 @@ class Routes {
     _listRouter.clear();
     /// 各自路由由各自模块管理，统一在此添加初始化
     _listRouter.add(LoginRouter());
-    _listRouter.add(GoodsRouter());
-    _listRouter.add(OrderRouter());
+    _listRouter.add(RecruitmentRouter());
+    _listRouter.add(ArticlesRouter());
+    _listRouter.add(MineRouter());
   
     /// 初始化路由 循环遍历取出每个子router进行初始化操作
     _listRouter.forEach((routerProvider) {

@@ -7,6 +7,13 @@ class BaseListProvider<T> extends ChangeNotifier {
   final List<T> _list = [];
   List<T> get list => _list;
 
+  int _page = 1;
+  int get page => _page;
+
+  /// 是否正在加载数据
+  bool _isLoading = false;
+  bool get isLoading => _isLoading;
+
   StateType _stateType = StateType.loading;
   bool _hasMore = true;
 
@@ -24,6 +31,14 @@ class BaseListProvider<T> extends ChangeNotifier {
 
   void setHasMore(bool hasMore) {
     _hasMore = hasMore;
+  }
+
+  void increase() {
+    _page++;
+  }
+
+  void toggle() {
+    _isLoading = !_isLoading;
   }
 
   void add(T data) {
@@ -62,6 +77,7 @@ class BaseListProvider<T> extends ChangeNotifier {
   }
 
   void refresh() {
+    _page = 1;
     notifyListeners();
   }
 }

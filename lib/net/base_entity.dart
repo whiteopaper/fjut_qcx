@@ -15,8 +15,12 @@ class BaseEntity<T> {
   BaseEntity(this.code, this.message, this.data);
 
   BaseEntity.fromJson(Map<String, dynamic> json) {
-    code = json[Constant.code];
-    message = json[Constant.message];
+    if (json.containsKey(Constant.code)){
+      code = json[Constant.code];
+    }
+    if (json.containsKey(Constant.message)){
+      message = json[Constant.message];
+    }
     if (json.containsKey(Constant.data)) {
       if (json[Constant.data] is List) {
         list =  (json[Constant.data] as List);
@@ -28,6 +32,25 @@ class BaseEntity<T> {
       } else {
         data = _generateOBJ(json[Constant.data]);
       }
+    }
+
+    if (json.containsKey(Constant.jobfairList)) {
+      code = Constant.CODE_200;
+      (json[Constant.jobfairList] as List).forEach((value) {
+        listData.add(_generateOBJ<T>(value));
+      });
+    }
+    if (json.containsKey(Constant.keynoteList)) {
+      code = Constant.CODE_200;
+      (json[Constant.keynoteList] as List).forEach((value) {
+        listData.add(_generateOBJ<T>(value));
+      });
+    }
+    if (json.containsKey(Constant.dataList)) {
+      code = Constant.CODE_200;
+      (json[Constant.dataList] as List).forEach((value) {
+        listData.add(_generateOBJ<T>(value));
+      });
     }
   }
 

@@ -32,7 +32,7 @@ dependencies:
   # 侧滑删除 https://github.com/letsar/flutter_slidable
   flutter_slidable: ^0.5.4
   # WebView插件 https://github.com/flutter/plugins/tree/master/packages/webview_flutter
-  webview_flutter: 0.3.19+7
+  webview_flutter: 0.3.21
   # 处理键盘事件 https://github.com/diegoveloper/flutter_keyboard_actions
   keyboard_actions: ^3.2.0
   # 列表悬浮头 https://github.com/fluttercommunity/flutter_sticky_headers
@@ -66,6 +66,11 @@ dev_dependencies:
   flutter_test:
     sdk: flutter
 
+  json_model: ^0.0.2
+  build_runner: ^1.0.0
+  json_serializable: ^2.0.0
+
+
 flutter:
   uses-material-design: true
 
@@ -74,8 +79,7 @@ flutter:
     - assets/images/
     - assets/images/home/
     - assets/images/state/
-    - assets/images/order/
-    - assets/images/order/dark/
+    - assets/images/recruitment/
     - assets/images/login/
     - assets/images/goods/
     - assets/images/account/

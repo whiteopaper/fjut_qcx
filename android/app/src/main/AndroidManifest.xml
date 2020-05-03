@@ -27,4 +27,7 @@
             android:name="flutterEmbedding"
             android:value="2" />
     </application>
+<!--    <application android:networkSecurityConfig="@values/network_security_config">-->
+<!--        &lt;!&ndash; ... &ndash;&gt;-->
+<!--    </application>-->
 </manifest>

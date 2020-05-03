@@ -10,6 +10,10 @@ class Constant {
   static const String message = 'message';
   static const String code = 'code';
 
+  static const String jobfairList = 'jobfairList';
+  static const String keynoteList = 'keynoteList';
+  static const String dataList = 'dataList';
+
   //ok
   static const int CODE_200 = 20000;
   //error

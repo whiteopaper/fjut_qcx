@@ -5,7 +5,6 @@ import 'package:fjut_qcx/res/resources.dart';
 import 'package:fjut_qcx/util/image_utils.dart';
 import 'package:fjut_qcx/util/theme_utils.dart';
 
-/// design/9暂无状态页面/index.html#artboard3
 class StateLayout extends StatefulWidget {
   
   const StateLayout({
@@ -29,9 +28,9 @@ class _StateLayoutState extends State<StateLayout> {
   @override
   Widget build(BuildContext context) {
     switch (widget.type) {
-      case StateType.order:
+      case StateType.recruitment:
         _img = 'zwdd';
-        _hintText = '暂无订单';
+        _hintText = '暂无招聘信息';
         break;
       case StateType.goods:
         _img = 'zwsp';
@@ -89,7 +88,7 @@ class _StateLayoutState extends State<StateLayout> {
 
 enum StateType {
   /// 订单
-  order,
+  recruitment,
   /// 商品
   goods,
   /// 无网络

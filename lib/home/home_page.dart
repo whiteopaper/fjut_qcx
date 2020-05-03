@@ -1,8 +1,8 @@
 
-import 'package:fjut_qcx/common/common.dart';
+import 'package:fjut_qcx/article/view/articles_page.dart';
 import 'package:fjut_qcx/login/page/login_page.dart';
-import 'package:fjut_qcx/order/page/order_page.dart';
-import 'package:flustars/flustars.dart';
+import 'package:fjut_qcx/mine/view/mine_page.dart';
+import 'package:fjut_qcx/recruitment/view/recruitment_page.dart';
 import 'package:flutter/material.dart';
 import 'package:fjut_qcx/home/provider/home_provider.dart';
 import 'package:fjut_qcx/res/resources.dart';
@@ -36,10 +36,10 @@ class _HomeState extends State<Home> {
   
   void initData() {
     _pageList = [
-      OrderPage(),
+      RecruitmentPage(),
+      ArticlesPage(),
       LoginPage(),
-      LoginPage(),
-      LoginPage()
+      MinePage()
     ];
   }
 

@@ -90,7 +90,7 @@ class _SearchBarState extends State<SearchBar> {
                         border: InputBorder.none,
                         icon: Padding(
                           padding: const EdgeInsets.only(top: 8.0, bottom: 8.0, left: 8.0),
-                          child: LoadAssetImage('order/order_search', color: iconColor,),
+                          child: LoadAssetImage('search_bar_search', color: iconColor,),
                         ),
                         hintText: widget.hintText,
                         suffixIcon: GestureDetector(
@@ -98,7 +98,7 @@ class _SearchBarState extends State<SearchBar> {
                             label: '清空',
                             child: Padding(
                               padding: const EdgeInsets.only(left: 16.0, top: 8.0, bottom: 8.0),
-                              child: LoadAssetImage('order/order_delete', color: iconColor),
+                              child: LoadAssetImage('search_bar_delete', color: iconColor),
                             ),
                           ),
                           onTap: () {

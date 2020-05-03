@@ -158,6 +158,7 @@ class AdapterInterceptor extends Interceptor{
       }
       result = content;
       response.statusCode = ExceptionHandle.success;
+
     } else {
       if (response.statusCode == ExceptionHandle.not_found) {
         /// 错误数据格式化后，按照成功数据返回

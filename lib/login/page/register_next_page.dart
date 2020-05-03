@@ -7,8 +7,8 @@ import 'package:flustars/flustars.dart' as FlutterStars;
 import 'package:image_picker/image_picker.dart';
 import 'package:fjut_qcx/login/presenter/Login_presenter.dart';
 import 'package:fjut_qcx/login/login_router.dart';
-import 'package:fjut_qcx/goods/provider/goods_sort_provider.dart';
-import 'package:fjut_qcx/login/widgets/goods_sort_dialog.dart';
+import 'package:fjut_qcx/login/provider/deptment_provider.dart';
+import 'package:fjut_qcx/login/widgets/deptmengt_sort_dialog.dart';
 import 'package:fjut_qcx/routers/fluro_navigator.dart';
 import 'package:fjut_qcx/util/toast.dart';
 import 'package:fjut_qcx/widgets/click_item.dart';
@@ -199,7 +199,7 @@ class _RegisterNextState extends State<RegisterNextPage> {
     );
   }
 
-  GoodsSortProvider _provider = GoodsSortProvider();
+  DepartmentSortProvider _provider = DepartmentSortProvider();
 
   @override
   void dispose() {
@@ -213,7 +213,7 @@ class _RegisterNextState extends State<RegisterNextPage> {
       /// 使用true则高度不受16分之9的最高限制
       isScrollControlled: true,
       builder: (BuildContext context) {
-        return GoodsSortDialog(
+        return DepartmentSortDialog(
           provider: _provider,
           onSelected: (id, name) {
             setState(() {
