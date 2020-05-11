@@ -23,12 +23,11 @@ class BaseEntity<T> {
     }
     if (json.containsKey(Constant.data)) {
       if (json[Constant.data] is List) {
-        list =  (json[Constant.data] as List);
-      } else if (json[Constant.data] is Map) {
-        mapData = (json[Constant.data] as Map);
-        (json[Constant.data] as Map).forEach((key,value) {
+        (json[Constant.data] as List).forEach((value) {
           listData.add(_generateOBJ<T>(value));
         });
+      } else if (json[Constant.data] is Map) {
+        mapData = (json[Constant.data] as Map);
       } else {
         data = _generateOBJ(json[Constant.data]);
       }

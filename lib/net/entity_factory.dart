@@ -1,6 +1,7 @@
 
 import 'package:fjut_qcx/article/models/article_model.dart';
 import 'package:fjut_qcx/login/models/department_entity.dart';
+import 'package:fjut_qcx/market/model/resume_model.dart';
 import 'package:fjut_qcx/recruitment/models/job_fair_model.dart';
 import 'package:fjut_qcx/recruitment/models/keynote_model.dart';
 import 'package:fjut_qcx/recruitment/models/recruitment_brochure_model.dart';
@@ -17,6 +18,8 @@ class EntityFactory {
       return Recruitment_brochure_model.fromJson(json) as T;
     } else if (T.toString() == 'ArticleModel') {
       return ArticleModel.fromJson(json) as T;
+    } else if (T.toString() == 'ResumeModel') {
+      return ResumeModel.fromJson(json) as T;
     } else if (T.toString() == 'DepartmentModel') {
       return DepartmentModel.fromJson(json) as T;
     } else {

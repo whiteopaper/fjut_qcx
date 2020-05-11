@@ -1,4 +1,5 @@
 import 'package:fjut_qcx/login/presenter/Login_presenter.dart';
+import 'package:fjut_qcx/mine/model/user_model.dart';
 import 'package:fjut_qcx/routers/routers.dart';
 import 'package:fjut_qcx/widgets/load_image.dart';
 import 'package:flutter/foundation.dart';
@@ -67,7 +68,11 @@ class LoginPageState extends State<LoginPage> {
     presenter.login(
       username, password,onSuccess: (token){
         FlutterStars.SpUtil.putString(Constant.accessToken, token);
-        presenter.info();
+        presenter.info(
+            onSuccessMap: (data){
+              FlutterStars.SpUtil.putObject(Constant.currentUser, UserModel.fromJson(data));
+            }
+        );
         NavigatorUtils.push(context, Routes.home, clearStack: true);
       }
     ) ;

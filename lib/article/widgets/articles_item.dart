@@ -23,10 +23,7 @@ class ArticlesItem extends StatelessWidget {
     bool isDark = ThemeUtils.isDark(context);
 
     return Container(
-      margin: const EdgeInsets.only(top: 8.0),
-      child: MyCard(
-        child: _container(context),
-      )
+      child: _container(context),
     );
   }
 

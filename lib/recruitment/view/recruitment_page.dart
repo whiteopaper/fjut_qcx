@@ -127,7 +127,7 @@ class _RecruitmentPageState extends State<RecruitmentPage> with AutomaticKeepAli
             centerTitle: false,
             titlePadding: const EdgeInsetsDirectional.only(start: 16.0, bottom: 14.0),
             collapseMode: CollapseMode.pin,
-            title: Text('轮播图', style: TextStyle(color: ThemeUtils.getIconColor(context)),),
+            title: Text('招聘模块', style: TextStyle(color: ThemeUtils.getIconColor(context)),),
           ),
         ),
       ),

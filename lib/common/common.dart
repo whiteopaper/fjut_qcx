@@ -7,7 +7,7 @@ class Constant {
   static bool isUnitTest  = false;
   
   static const String data = 'result';
-  static const String message = 'message';
+  static const String message = 'msg';
   static const String code = 'code';
 
   static const String jobfairList = 'jobfairList';

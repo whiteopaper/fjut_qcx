@@ -1,7 +1,7 @@
 
 import 'dart:io';
 import 'package:fjut_qcx/common/common.dart';
-import 'package:fjut_qcx/login/models/auth/user_entity.dart';
+import 'package:fjut_qcx/mine/model/user_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flustars/flustars.dart' as FlutterStars;
 import 'package:image_picker/image_picker.dart';
@@ -40,6 +40,7 @@ class _RegisterNextState extends State<RegisterNextPage> {
 
   TextEditingController _vsernameController = TextEditingController();
   TextEditingController _emailController = TextEditingController();
+  TextEditingController _introductionController = TextEditingController();
   LoginPresenter presenter = LoginPresenter();
 
   void _getImage() async {
@@ -56,11 +57,17 @@ class _RegisterNextState extends State<RegisterNextPage> {
     super.initState();
     //监听输入改变
     _vsernameController.addListener(_verify);
+    _emailController.addListener(_verify);
+    _introductionController.addListener(_verify);
   }
   void _verify() {
     String vsername = _vsernameController.text;
+    String email = _emailController.text;
     bool isClick = true;
     if (vsername.isEmpty || vsername.length > 4) {
+      isClick = false;
+    }
+    if (email.isEmpty || email.length > 20) {
       isClick = false;
     }
     if (_departmentName == null || _departmentName.isEmpty ) {
@@ -78,12 +85,22 @@ class _RegisterNextState extends State<RegisterNextPage> {
   void _register() {
     String vsername = _vsernameController.text;
     String email = _emailController.text ?? '';
-    UserModel currentUser = UserModel.fromJson(FlutterStars.SpUtil.getObject(Constant.currentUser));
+    String introduction = _introductionController.text ?? 'Hello World!';
     presenter.registerNext(
-        currentUser , vsername, email ,_departmentId,
+        vsername, email, introduction, _departmentId,
         onSuccess: (token){
-          Toast.show('完善成功！请登录···',duration: 2000);
-          NavigatorUtils.push(context, LoginRouter.loginPage);
+          if(widget.isAdd){
+            Toast.show('完善成功！请登录···',duration: 2000);
+            NavigatorUtils.push(context, LoginRouter.loginPage);
+          }else{
+            presenter.info(
+                onSuccessMap: (data){
+                  FlutterStars.SpUtil.putObject(Constant.currentUser, UserModel.fromJson(data));
+                  Toast.show('修改完成',duration: 2000);
+                  NavigatorUtils.goBackWithParams(context,UserModel.fromJson(data));
+                }
+            );
+          }
         }
     ) ;
 
@@ -96,7 +113,8 @@ class _RegisterNextState extends State<RegisterNextPage> {
           centerTitle: widget.isAdd ? '完善个人信息' : '修改个人信息',
           onPressedBack: () {
             Toast.cancelToast();
-            NavigatorUtils.push(context, LoginRouter.loginPage);
+            widget.isAdd ?NavigatorUtils.push(context, LoginRouter.loginPage):
+            NavigatorUtils.goBack(context);
           },
         ),
         body: MyScrollView(
@@ -149,12 +167,33 @@ class _RegisterNextState extends State<RegisterNextPage> {
                   )
                 ]
             ),
-
+            Stack(
+                alignment: Alignment(-0.64, -0.3),
+                children: <Widget>[
+                  TextFieldItem(
+                    title: '电子邮箱',
+                    hintText: '填写电子邮箱',
+                    keyboardType : TextInputType.emailAddress,
+                    controller: _emailController,
+                  ),
+                  Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: <Widget>[
+                      Semantics(
+                        child: LoadAssetImage('login/Required',
+                          width: 10.0,
+                          height: 10.0,
+                        ),
+                      ),
+                    ],
+                  )
+                ]
+            ),
             TextFieldItem(
-              title: '电子邮件',
+              title: '个性签名',
               hintText: '选填',
               keyboardType : TextInputType.emailAddress,
-              controller: _emailController,
+              controller: _introductionController,
             ),
             Gaps.vGap16,
             const Padding(
@@ -219,6 +258,7 @@ class _RegisterNextState extends State<RegisterNextPage> {
             setState(() {
               _departmentId = id;
               _departmentName = name;
+              _verify();
             });
           },
         );

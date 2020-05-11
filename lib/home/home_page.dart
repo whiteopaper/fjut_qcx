@@ -1,6 +1,7 @@
 
 import 'package:fjut_qcx/article/view/articles_page.dart';
 import 'package:fjut_qcx/login/page/login_page.dart';
+import 'package:fjut_qcx/market/view/market_page.dart';
 import 'package:fjut_qcx/mine/view/mine_page.dart';
 import 'package:fjut_qcx/recruitment/view/recruitment_page.dart';
 import 'package:flutter/material.dart';
@@ -38,7 +39,7 @@ class _HomeState extends State<Home> {
     _pageList = [
       RecruitmentPage(),
       ArticlesPage(),
-      LoginPage(),
+      MarketPage(),
       MinePage()
     ];
   }

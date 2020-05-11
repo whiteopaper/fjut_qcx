@@ -1,5 +1,5 @@
 
-import 'package:fjut_qcx/login/models/auth/user_entity.dart';
+import 'package:fjut_qcx/mine/model/user_model.dart';
 import 'package:fjut_qcx/net/net.dart';
 import 'package:fjut_qcx/util/toast.dart';
 import 'package:flutter/cupertino.dart';
@@ -15,9 +15,6 @@ class LoginPresenter {
       Method.post, HttpApi.login,
       params: params,
       onSuccess: onSuccess,
-      onError: (code, msg) {
-        Toast.show(msg);
-      }
     );
   }
 
@@ -33,19 +30,16 @@ class LoginPresenter {
     );
   }
 
-  registerNext(UserModel currentUser, String vsername, String email, int deptid, {Function(String t) onSuccess}){
-    Map<String, dynamic> params = currentUser.toJson();
-    params['vsername'] = vsername;
+  registerNext(String vsername, String email, String introduction, int deptId, {Function(String t) onSuccess}){
+    Map<String, dynamic> params = new Map();
+    params['vserName'] = vsername;
     params['email'] = email;
-    params['deptid'] = deptid;
+    params['introduction'] = introduction;
+    params['deptid'] = deptId;
     asyncRequestNetwork<String>(
         Method.post, HttpApi.modifyPersonalInfo,
         params: params,
-        onSuccess: onSuccess,
-        onError: (code, msg) {
-          Toast.show(msg);
-        }
-
+        onSuccess: onSuccess
     );
   }
 
@@ -53,12 +47,9 @@ class LoginPresenter {
   //登录-刷新用户信息
   info( {Function(Map<String, dynamic>) onSuccessMap}){
     DioUtils.instance.asyncRequestNetwork<dynamic>(
-        Method.get, HttpApi.info,
+        Method.get, HttpApi.userInfo,
         isMap: true,
-        onSuccessMap: onSuccessMap,
-        onError: (code, msg) {
-          Toast.show(msg);
-        }
+        onSuccessMap: onSuccessMap
     );
   }
 
@@ -67,10 +58,23 @@ class LoginPresenter {
     DioUtils.instance.asyncRequestNetwork<dynamic>(
         Method.get, HttpApi.departments,
         isList: true,
-        onSuccessList: onSuccessList,
-        onError: (code, msg) {
-          Toast.show(msg);
-        }
+        onSuccessList: onSuccessList
+    );
+  }
+
+  logout( {Function(String) onSuccess}){
+    asyncRequestNetwork<String>(
+        Method.post, HttpApi.logout,
+        onSuccess: onSuccess
+    );
+  }
+
+  isRole( int rid,{Function(String) onSuccess, Function(int code, String msg) onError}){
+    asyncRequestNetwork<String>(
+        Method.post, HttpApi.isRole,
+        params:rid,
+        onSuccess: onSuccess,
+        onError: onError
     );
   }
 

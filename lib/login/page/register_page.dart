@@ -1,7 +1,7 @@
 import 'package:fjut_qcx/common/common.dart';
-import 'package:fjut_qcx/login/models/auth/user_entity.dart';
 import 'package:fjut_qcx/login/presenter/Login_presenter.dart';
 import 'package:fjut_qcx/login/login_router.dart';
+import 'package:fjut_qcx/mine/model/user_model.dart';
 import 'package:fjut_qcx/routers/fluro_navigator.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -71,7 +71,6 @@ class _RegisterPageState extends State<RegisterPage> {
           FlutterStars.SpUtil.putString(Constant.accessToken, token);
           presenter.info(
             onSuccessMap: (data){
-              FlutterStars.SpUtil.putObject(Constant.currentUser, UserModel.fromJson(data));
               Toast.show('注册成功！请真实填写个人信息',duration: 5000);
               NavigatorUtils.push(context, '${LoginRouter.registerNextPage}?isAdd=true');
             }

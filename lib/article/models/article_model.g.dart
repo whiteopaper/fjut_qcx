@@ -6,7 +6,7 @@ part of 'article_model.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-ArticleModel _$ArticleFromJson(Map<String, dynamic> json) {
+ArticleModel _$ArticleModelFromJson(Map<String, dynamic> json) {
   return ArticleModel()
     ..id = json['id'] as String
     ..title = json['title'] as String
@@ -20,7 +20,8 @@ ArticleModel _$ArticleFromJson(Map<String, dynamic> json) {
     ..senddate = json['senddate'] as String;
 }
 
-Map<String, dynamic> _$ArticleToJson(ArticleModel instance) => <String, dynamic>{
+Map<String, dynamic> _$ArticleModelToJson(ArticleModel instance) =>
+    <String, dynamic>{
       'id': instance.id,
       'title': instance.title,
       'typeid': instance.typeid,

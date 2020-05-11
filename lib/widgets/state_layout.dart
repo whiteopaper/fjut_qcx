@@ -32,9 +32,13 @@ class _StateLayoutState extends State<StateLayout> {
         _img = 'zwdd';
         _hintText = '暂无招聘信息';
         break;
-      case StateType.goods:
-        _img = 'zwsp';
-        _hintText = '暂无商品';
+      case StateType.resume:
+        _img = 'add';
+        _hintText = '点击添加个人简历';
+        break;
+      case StateType.noPermission:
+        _img = 'sorry';
+        _hintText = '等待通过学校的身份验证';
         break;
       case StateType.network:
         _img = 'zwwl';
@@ -43,10 +47,6 @@ class _StateLayoutState extends State<StateLayout> {
       case StateType.message:
         _img = 'zwxx';
         _hintText = '暂无消息';
-        break;
-      case StateType.account:
-        _img = 'zwzh';
-        _hintText = '马上添加提现账号吧';
         break;
       case StateType.loading:
         _img = '';
@@ -87,16 +87,16 @@ class _StateLayoutState extends State<StateLayout> {
 }
 
 enum StateType {
-  /// 订单
+  /// 学校招聘
   recruitment,
-  /// 商品
-  goods,
-  /// 无网络
+  /// 简历添加
+  resume,
+  /// 无权限
+  noPermission,
+  /// 网络
   network,
-  /// 消息
+  /// 信息
   message,
-  /// 无提现账号
-  account,
   /// 加载中
   loading,
   /// 空

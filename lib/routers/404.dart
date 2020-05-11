@@ -11,7 +11,7 @@ class WidgetNotFound extends StatelessWidget {
         centerTitle: '页面不存在',
       ),
       body: StateLayout(
-        type: StateType.account,
+        type: StateType.message,
         hintText: '页面不存在',
       ),
     );

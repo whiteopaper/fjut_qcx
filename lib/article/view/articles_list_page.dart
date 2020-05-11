@@ -7,12 +7,8 @@ import 'package:fjut_qcx/mvp/base_page_state.dart';
 import 'package:fjut_qcx/mvp/base_page_list_view.dart';
 import 'package:fjut_qcx/provider/base_list_provider.dart';
 import 'package:flutter/material.dart';
-import 'package:fjut_qcx/article/models/goods_item_entity.dart';
 import 'package:fjut_qcx/article/provider/articles_page_provider.dart';
-import 'package:fjut_qcx/widgets/state_layout.dart';
 import 'package:provider/provider.dart';
-
-import '../widgets/goods_item.dart';
 
 class ArticlesListPage extends StatefulWidget {
   

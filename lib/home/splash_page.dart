@@ -23,7 +23,7 @@ class SplashPage extends StatefulWidget {
 class _SplashPageState extends State<SplashPage> {
 
   int _status = 0;
-  List<String> _guideList = ['app_start_1', 'app_start_2', 'app_start_3'];
+  List<String> _guideList = ['a1', 'a2', 'a3'];
   StreamSubscription _subscription;
 
   @override
@@ -57,7 +57,7 @@ class _SplashPageState extends State<SplashPage> {
   }
 
   void _initSplash() {
-    _subscription = Observable.just(1).delay(Duration(milliseconds: 1500)).listen((_) {
+    _subscription = Observable.just(1).delay(Duration(milliseconds: 1000)).listen((_) {
       if (SpUtil.getBool(Constant.keyGuide, defValue: true)) {
         SpUtil.putBool(Constant.keyGuide, false);
         _initGuide();
@@ -80,7 +80,7 @@ class _SplashPageState extends State<SplashPage> {
         widthFactor: 0.33,
         leftFactor: 0.33,
         bottomFactor: 0,
-        child: const LoadAssetImage('logo')
+        child: const LoadAssetImage('qcx')
       ) :
       Swiper(
         key: const Key('swiper'),

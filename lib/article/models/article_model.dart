@@ -17,6 +17,6 @@ class ArticleModel {
     String content;
     String senddate;
     
-    factory ArticleModel.fromJson(Map<String,dynamic> json) => _$ArticleFromJson(json);
-    Map<String, dynamic> toJson() => _$ArticleToJson(this);
+    factory ArticleModel.fromJson(Map<String,dynamic> json) => _$ArticleModelFromJson(json);
+    Map<String, dynamic> toJson() => _$ArticleModelToJson(this);
 }

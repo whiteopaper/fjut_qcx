@@ -13,7 +13,7 @@ class LoadImage extends StatelessWidget {
     this.height,
     this.fit: BoxFit.cover, 
     this.format: 'png',
-    this.holderImg: 'none'
+    this.holderImg: 'image'
   }): super(key: key);
   
   final String image;
@@ -37,7 +37,7 @@ class LoadImage extends StatelessWidget {
         return CachedNetworkImage(
           imageUrl: image,
           placeholder: (context, url) => LoadAssetImage(holderImg, height: height, width: width, fit: fit),
-          errorWidget: (context, url, error) => LoadAssetImage(holderImg, height: height, width: width, fit: fit),
+          errorWidget: (context, url, error) => LoadAssetImage('image-fail', height: height, width: width, fit: fit),
           width: width,
           height: height,
           fit: fit,
