@@ -1,5 +1,6 @@
 
 import 'package:fjut_qcx/article/articles_router.dart';
+import 'package:fjut_qcx/market/market_router.dart';
 import 'package:fjut_qcx/mine/mine_router.dart';
 import 'package:fjut_qcx/recruitment/recruitment_router.dart';
 import 'package:fluro/fluro.dart';
@@ -42,6 +43,7 @@ class Routes {
     _listRouter.add(LoginRouter());
     _listRouter.add(RecruitmentRouter());
     _listRouter.add(ArticlesRouter());
+    _listRouter.add(MarketRouter());
     _listRouter.add(MineRouter());
   
     /// 初始化路由 循环遍历取出每个子router进行初始化操作

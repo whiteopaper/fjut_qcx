@@ -1,4 +1,5 @@
 
+import 'package:fjut_qcx/market/view/resume_detail_page.dart';
 import 'package:fluro/fluro.dart';
 import 'package:fjut_qcx/routers/router_init.dart';
 

@@ -7,8 +7,6 @@ import 'package:fjut_qcx/util/theme_utils.dart';
 import 'package:fjut_qcx/widgets/load_image.dart';
 import 'package:provider/provider.dart';
 
-
-/// design/4商品/index.html#artboard20
 class DepartmentSortDialog extends StatefulWidget {
 
   const DepartmentSortDialog({
@@ -139,7 +137,7 @@ class DepartmentSortDialogState extends State<DepartmentSortDialog> with SingleT
                   alignment: Alignment.center,
                   padding: const EdgeInsets.symmetric(vertical: 16.0),
                   child: const Text(
-                    '商品分类',
+                    '选择部门',
                     style: TextStyles.textBold16,
                   ),
                 ),

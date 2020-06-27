@@ -91,16 +91,16 @@ class BasePagePresenter<V extends IMvpView> extends IPresenter {
   }
 
   /// 上传图片实现
-  Future<String> uploadImg(File image) async {
+  Future<String> uploadImg(String upload ,File image) async {
     String imgPath = '';
     try{
       String path = image.path;
       var name = path.substring(path.lastIndexOf('/') + 1);
       FormData formData = FormData.fromMap({
-        'uploadIcon': await MultipartFile.fromFile(path, filename: name)
+        'uploadFile': await MultipartFile.fromFile(path, filename: name)
       });
-      await requestNetwork<String>(Method.post,
-          url: HttpApi.upload,
+      await requestNetwork<String>(Method.get,
+          url: upload,
           params: formData,
           onSuccess: (data) {
             imgPath = data;

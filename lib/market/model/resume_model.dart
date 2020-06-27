@@ -8,6 +8,9 @@ class ResumeModel {
 
     String id;
     String user_id;
+    String vsername;
+    String mobile;
+    String email;
     String intention_position;
     String intention_city;
     String intention_wages;
@@ -23,6 +26,7 @@ class ResumeModel {
     String self_comment;
     String create_time;
     num visit_num;
+    int cid;
     
     factory ResumeModel.fromJson(Map<String,dynamic> json) => _$Resume_modelFromJson(json);
     Map<String, dynamic> toJson() => _$Resume_modelToJson(this);

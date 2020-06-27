@@ -15,6 +15,7 @@ class TextFieldItem extends StatelessWidget {
     this.keyboardType: TextInputType.text,
     this.hintText: '',
     this.focusNode,
+    this.enabled:true,
   }): super(key: key);
 
   final TextEditingController controller;
@@ -22,6 +23,7 @@ class TextFieldItem extends StatelessWidget {
   final String hintText;
   final TextInputType keyboardType;
   final FocusNode focusNode;
+  final bool enabled;
 
   @override
   Widget build(BuildContext context) {
@@ -44,6 +46,7 @@ class TextFieldItem extends StatelessWidget {
               child: TextField(
                 focusNode: focusNode,
                 keyboardType: keyboardType,
+                enabled:enabled,
                 inputFormatters: _getInputFormatters(),
                 controller: controller,
                 //style: TextStyles.textDark14,

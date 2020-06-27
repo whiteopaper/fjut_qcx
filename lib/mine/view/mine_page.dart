@@ -6,8 +6,10 @@ import 'package:fjut_qcx/market/widget/resumes_item.dart';
 import 'package:fjut_qcx/mine/model/user_model.dart';
 import 'package:fjut_qcx/mine/presenter/mine_presenter.dart';
 import 'package:fjut_qcx/mine/widget/exit_dialog.dart';
+import 'package:fjut_qcx/net/http_api.dart';
 import 'package:fjut_qcx/res/resources.dart';
 import 'package:fjut_qcx/routers/fluro_navigator.dart';
+import 'package:fjut_qcx/util/image_utils.dart';
 import 'package:fjut_qcx/widgets/app_bar.dart';
 import 'package:fjut_qcx/widgets/load_image.dart';
 import 'package:fjut_qcx/widgets/my_card.dart';
@@ -24,28 +26,17 @@ class MinePage extends StatefulWidget {
 class _MinePageState extends State<MinePage> {
 
   UserModel currentUser ;
-  ResumeModel resumeModel ;
-  StateType type = StateType.loading;
-  MinePresenter presenter =  MinePresenter();
+  LoginPresenter presenter = LoginPresenter();
 
 
   @override
   void initState(){
     super.initState();
     currentUser = UserModel.fromJson(FlutterStars.SpUtil.getObject(Constant.currentUser));
-    presenter.query(
+    presenter.info(
       onSuccessMap: (data){
         setState(() {
-          resumeModel = ResumeModel.fromJson(data);
-        });
-      },
-      onError: (code,mes){
-        setState(() {
-          if(code == 50002) {
-            type = StateType.noPermission;
-          }else{
-            type = StateType.resume;
-          }
+          currentUser = UserModel.fromJson(data);
         });
       }
     );
@@ -63,8 +54,45 @@ class _MinePageState extends State<MinePage> {
         },
       ),
       body: MyScrollView(
-
         children: <Widget>[
+          Container(
+              margin: const EdgeInsets.all(3.0),
+              child:MyCard(
+//                color: Colors.lime,
+                  child: Container(
+                    width: double.infinity,
+                    padding: const EdgeInsets.symmetric(vertical: 10),
+                    child: Column(
+                      children: <Widget>[
+                        Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children:<Widget>[
+                              LoadAssetImage(
+                                'fjut',
+                                height:50 ,
+                              ),
+                              Column(
+                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                children:<Widget>[
+                                  Container(
+                                      height:35,
+                                      child:LoadAssetImage(
+                                        'qcx',
+                                      )
+                                  ),
+                                  Container(
+                                      child:Text("亲苍霞")
+                                  )
+                                ],
+                              ),
+                            ]
+                        ),
+                        Gaps.vGap8,
+                      ],
+                    ),
+                  )
+              )
+          ),
           Container(
             color: Colors.white,
             height: 200.0,
@@ -81,11 +109,13 @@ class _MinePageState extends State<MinePage> {
                     Positioned(
                       left: constraints.maxWidth / 2 - 25,
                       top: constraints.maxHeight - 40,
-                      child: CircleAvatar(
+                      child: ClipOval(
                         child: Container(
                           height: 50,
                           width: 50,
-                          child: LoadAssetImage("recruitment/icon_avatar")
+                          child: currentUser.icon_path!=null
+                              ? LoadImage(HttpApi.imageUrl+currentUser.icon_path)
+                              : LoadAssetImage("recruitment/icon_avatar" )
                         )
                       ),
                     )
@@ -97,8 +127,9 @@ class _MinePageState extends State<MinePage> {
           Container(
             margin: const EdgeInsets.all(10.0),
             child: MyCard(
+                color: Colors.greenAccent,
               child: Container(
-              width: double.infinity,
+                width: double.infinity,
                 child: InkWell(
                   onTap: ()=>NavigatorUtils.pushResult(context, '${LoginRouter.registerNextPage}?isAdd=false', (result){
                     setState(() {
@@ -110,15 +141,6 @@ class _MinePageState extends State<MinePage> {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: <Widget>[
-                        Gaps.empty,
-                        Text(
-                            "真诚勤勇",
-                            style: TextStyle(
-                              fontSize: Dimens.gap_dp24,
-                              color: Colours.text,
-                            )
-                        ),
-                        Gaps.line,
                         Gaps.vGap16,
                         Row(
                           mainAxisAlignment: MainAxisAlignment.center,
@@ -141,7 +163,16 @@ class _MinePageState extends State<MinePage> {
                         ),
                         Gaps.vGap8,
                         Text(
-                            currentUser.deptName!=null?"所在部门："+currentUser.deptName:"所在部门：点击完善个人信息",
+                            "轻触下方修改个人信息",
+                            style: TextStyle(
+                              fontSize: Dimens.font_sp10,
+                              color: Colours.text_gray,
+                            )
+                        ),
+                        Gaps.line,
+                        Gaps.vGap8,
+                        Text(
+                            "所在部门："+(currentUser.deptName??"待验证"),
                             style: TextStyle(
                               fontSize: Dimens.font_sp15,
                               color: Colours.text,
@@ -149,7 +180,7 @@ class _MinePageState extends State<MinePage> {
                         ),
                         Gaps.vGap4,
                         Text(
-                            currentUser.email!=null?"电子邮箱："+currentUser.email:"电子邮箱：点击完善个人信息",
+                            "电子邮箱："+(currentUser.email??"无"),
                             style: TextStyle(
                               fontSize: Dimens.font_sp15,
                               color: Colours.text,
@@ -159,13 +190,14 @@ class _MinePageState extends State<MinePage> {
                         Container(
                           height: 42,
                           child:Text(
-                              currentUser.introduction!=null?"个性签名："+currentUser.introduction:"个性签名：点击完善个人信息",
+                              "个性签名："+(currentUser.introduction??""),
                               style: TextStyle(
                                 fontSize: Dimens.font_sp15,
                                 color: Colours.text,
                               )
                           ),
                         ),
+                        Gaps.vGap8,
                       ],
                     )
                   )
@@ -173,15 +205,6 @@ class _MinePageState extends State<MinePage> {
               )
             )
           ),
-          resumeModel == null ? ( type!=StateType.resume?StateLayout(type: type):
-            InkWell(
-              onTap: () => NavigatorUtils.goBack(context),
-              child: StateLayout(type: type) ,
-            )
-          ) :
-          ResumesItem(
-            model: resumeModel,
-          )
         ],
       ),
     );

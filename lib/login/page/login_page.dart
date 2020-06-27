@@ -68,11 +68,7 @@ class LoginPageState extends State<LoginPage> {
     presenter.login(
       username, password,onSuccess: (token){
         FlutterStars.SpUtil.putString(Constant.accessToken, token);
-        presenter.info(
-            onSuccessMap: (data){
-              FlutterStars.SpUtil.putObject(Constant.currentUser, UserModel.fromJson(data));
-            }
-        );
+        presenter.info();
         NavigatorUtils.push(context, Routes.home, clearStack: true);
       }
     ) ;
@@ -121,7 +117,6 @@ class LoginPageState extends State<LoginPage> {
           ),
       ]
     ),
-
     Gaps.vGap16,
     MyTextField(
       key: const Key('phone'),

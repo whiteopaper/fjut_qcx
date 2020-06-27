@@ -22,7 +22,6 @@ class MyTextField extends StatefulWidget {
     this.icon,
     this.focusNode,
     this.isInputPwd: false,
-    this.isRequired: false,
     this.getVCode,
     this.keyName
   }): super(key: key);
@@ -35,7 +34,6 @@ class MyTextField extends StatefulWidget {
   final String hintText;
   final FocusNode focusNode;
   final bool isInputPwd;
-  final bool isRequired;
   final Future<bool> Function() getVCode;
   /// 用于集成测试寻找widget
   final String keyName;
@@ -162,15 +160,6 @@ class _MyTextFieldState extends State<MyTextField> {
                     _isShowPwd = !_isShowPwd;
                   });
                 },
-              ),
-            ),
-            !widget.isRequired ? Gaps.empty : Gaps.hGap15,
-            !widget.isRequired ? Gaps.empty : Semantics(
-              label: '密码可见开关',
-              hint: '密码是否可见',
-              child: LoadAssetImage('login/Required',
-                width: 18.0,
-                height: 40.0,
               ),
             ),
             widget.getVCode == null ? Gaps.empty : Gaps.hGap15,

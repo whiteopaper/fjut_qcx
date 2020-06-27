@@ -12,6 +12,7 @@ class MyAppBar extends StatelessWidget implements PreferredSizeWidget {
     this.backgroundColor,
     this.title: '',
     this.centerTitle: '',
+    this.action,
     this.actionName: '',
     this.backImg: 'assets/images/ic_back_black.png',
     this.onPressed,
@@ -23,6 +24,7 @@ class MyAppBar extends StatelessWidget implements PreferredSizeWidget {
   final String title;
   final String centerTitle;
   final String backImg;
+  final Widget action;
   final String actionName;
   final VoidCallback onPressed;
   final VoidCallback onPressedBack;
@@ -63,7 +65,7 @@ class MyAppBar extends StatelessWidget implements PreferredSizeWidget {
               minWidth: 60.0,
             )
         ),
-        child: FlatButton(
+        child: this.action??FlatButton(
           child: Text(actionName, key: const Key('actionName')),
           textColor: ThemeUtils.isDark(context) ? Colours.dark_text : Colours.text,
           highlightColor: Colors.transparent,

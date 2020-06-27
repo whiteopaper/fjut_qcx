@@ -1,6 +1,7 @@
 
 import 'package:fjut_qcx/article/models/article_model.dart';
 import 'package:fjut_qcx/market/model/resume_model.dart';
+import 'package:fjut_qcx/market/model/work_model.dart';
 import 'package:fjut_qcx/net/http_api.dart';
 import 'package:flutter/material.dart';
 import 'package:fjut_qcx/res/resources.dart';
@@ -11,14 +12,14 @@ import 'package:fjut_qcx/widgets/my_card.dart';
 import '../market_router.dart';
 
 
-class ResumesItem extends StatelessWidget {
+class WorksItem extends StatelessWidget {
 
-  const ResumesItem({
+  const WorksItem({
     Key key,
     @required this.model,
   }) : super(key: key);
 
-  final ResumeModel model;
+  final WorkModel model;
 
   @override
   Widget build(BuildContext context) {
@@ -35,21 +36,21 @@ class ResumesItem extends StatelessWidget {
         child: Container(
 //          width: double.infinity,
           child: InkWell(
-            onTap: () => NavigatorUtils.push(context, '${MarketRouter.resumeDetailPage}?isAdd=false&uid=${model.user_id}'),
+            onTap: () => NavigatorUtils.push(context, '${MarketRouter.workDetailPage}?isAdd=false&uid=${model.user_id}'),
             child: Container(
               padding: const EdgeInsets.all(10.0),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
                   Text(
-                    "求职意向："+model.intention_position,
+                    "招聘岗位："+model.position,
                     style: TextStyle(
                       fontSize: Dimens.font_sp18,
                       color: Colours.text,
                     ),
                   ),
                   Text(
-                    "期望工资："+model.intention_wages,
+                    "工资薪酬："+model.wages,
                     style: TextStyle(
                       fontSize: Dimens.font_sp14,
                       color: Colours.text_gray_c,
@@ -59,7 +60,7 @@ class ResumesItem extends StatelessWidget {
                   Container(
                     height: Dimens.gap_dp50,
                     child: Text(
-                      "教育背景:"+model.education_school_time+"~"+model.education_department_major,
+                      "应聘条件:"+model.intention,
                       style: TextStyle(
                         fontSize: Dimens.font_sp16,
                         color: Colours.text_gray,

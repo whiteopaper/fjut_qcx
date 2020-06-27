@@ -52,19 +52,20 @@ class ArticlesListPageState extends BasePageState<ArticlesListPage, ArticlesPres
     if (!provider.hasMore) {
       return;
     }
+    provider.increase();
     getData();
   }
 
   void getData(){
-    int typeId = 18;
+    int typeId = 26;
     if (widget.index==0){
-      typeId = 18;
+      typeId = 26;
     } else if (widget.index==1){
-      typeId = 19;
+      typeId = 23;
     } else if (widget.index==2){
-      typeId = 21;
+      typeId = 22;
     } else if (widget.index==3){
-      typeId = 20;
+      typeId = 38;
     }
     presenter.getArticle(
         typeId,

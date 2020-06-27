@@ -1,7 +1,11 @@
 
+import 'dart:io';
+import 'package:dio/dio.dart';
+import 'package:fjut_qcx/common/common.dart';
 import 'package:fjut_qcx/mine/model/user_model.dart';
 import 'package:fjut_qcx/net/net.dart';
 import 'package:fjut_qcx/util/toast.dart';
+import 'package:flustars/flustars.dart';
 import 'package:flutter/cupertino.dart';
 
 class LoginPresenter {
@@ -49,7 +53,12 @@ class LoginPresenter {
     DioUtils.instance.asyncRequestNetwork<dynamic>(
         Method.get, HttpApi.userInfo,
         isMap: true,
-        onSuccessMap: onSuccessMap
+        onSuccessMap: (data){
+          if(onSuccessMap!=null){
+            SpUtil.putObject(Constant.currentUser, UserModel.fromJson(data));
+            onSuccessMap(data);
+          }
+        }
     );
   }
 
@@ -95,5 +104,23 @@ class LoginPresenter {
           }
         }
     );
+  }
+
+  uploadImg(String upload ,File image,{Function(String t) onSuccess,Function(int code,String t) onError}) async {
+    try{
+      String path = image.path;
+      var name = path.substring(path.lastIndexOf('/') + 1);
+      FormData formData = FormData.fromMap({
+        'uploadFile': await MultipartFile.fromFile(path, filename: name)
+      });
+      DioUtils.instance.requestNetwork<String>(Method.post,
+          upload,
+          params: formData,
+          onSuccess: onSuccess,
+          onError: onError
+      );
+    } catch(e) {
+      Toast.show('图片上传失败！');
+    }
   }
 }

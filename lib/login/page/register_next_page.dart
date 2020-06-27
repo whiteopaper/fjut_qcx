@@ -2,8 +2,8 @@
 import 'dart:io';
 import 'package:fjut_qcx/common/common.dart';
 import 'package:fjut_qcx/mine/model/user_model.dart';
+import 'package:fjut_qcx/net/http_api.dart';
 import 'package:flutter/material.dart';
-import 'package:flustars/flustars.dart' as FlutterStars;
 import 'package:image_picker/image_picker.dart';
 import 'package:fjut_qcx/login/presenter/Login_presenter.dart';
 import 'package:fjut_qcx/login/login_router.dart';
@@ -32,7 +32,8 @@ class RegisterNextPage extends StatefulWidget {
 
 class _RegisterNextState extends State<RegisterNextPage> {
 
-  File _imageFile;
+  File _imageIcon;
+  File _imageLicense;
   int _departmentId;
   String _departmentName;
 
@@ -43,9 +44,19 @@ class _RegisterNextState extends State<RegisterNextPage> {
   TextEditingController _introductionController = TextEditingController();
   LoginPresenter presenter = LoginPresenter();
 
-  void _getImage() async {
+  void _getIcon() async {
     try {
-      _imageFile = await ImagePicker.pickImage(source: ImageSource.gallery, maxWidth: 800);
+      _imageIcon = await ImagePicker.pickImage(source: ImageSource.gallery, maxWidth: 800);
+      setState(() {});
+    } catch (e) {
+      Toast.show('没有权限，无法打开相册！');
+    }
+  }
+
+  void _getLicense() async {
+    try {
+      _imageLicense = await ImagePicker.pickImage(source: ImageSource.gallery, maxWidth: 800);
+      _verify();
       setState(() {});
     } catch (e) {
       Toast.show('没有权限，无法打开相册！');
@@ -60,17 +71,21 @@ class _RegisterNextState extends State<RegisterNextPage> {
     _emailController.addListener(_verify);
     _introductionController.addListener(_verify);
   }
+
   void _verify() {
     String vsername = _vsernameController.text;
     String email = _emailController.text;
     bool isClick = true;
-    if (vsername.isEmpty || vsername.length > 4) {
+    if (vsername.isEmpty ) {
       isClick = false;
     }
     if (email.isEmpty || email.length > 20) {
       isClick = false;
     }
     if (_departmentName == null || _departmentName.isEmpty ) {
+      isClick = false;
+    }
+    if (_imageLicense == null) {
       isClick = false;
     }
 
@@ -86,20 +101,24 @@ class _RegisterNextState extends State<RegisterNextPage> {
     String vsername = _vsernameController.text;
     String email = _emailController.text ?? '';
     String introduction = _introductionController.text ?? 'Hello World!';
+
     presenter.registerNext(
         vsername, email, introduction, _departmentId,
-        onSuccess: (token){
+        onSuccess: (_){
+          presenter.uploadImg(
+              HttpApi.uploadLicense, _imageLicense,
+              onSuccess: (_){
+                _imageIcon!=null?presenter.uploadImg(
+                  HttpApi.uploadIcon, _imageIcon,
+                ):null;
+              }
+          );
           if(widget.isAdd){
             Toast.show('完善成功！请登录···',duration: 2000);
-            NavigatorUtils.push(context, LoginRouter.loginPage);
+            NavigatorUtils.push(context, LoginRouter.loginPage,clearStack: true);
           }else{
-            presenter.info(
-                onSuccessMap: (data){
-                  FlutterStars.SpUtil.putObject(Constant.currentUser, UserModel.fromJson(data));
-                  Toast.show('修改完成',duration: 2000);
-                  NavigatorUtils.goBackWithParams(context,UserModel.fromJson(data));
-                }
-            );
+            Toast.show('修改成功！',duration: 1000);
+            NavigatorUtils.goBack(context);
           }
         }
     ) ;
@@ -133,14 +152,14 @@ class _RegisterNextState extends State<RegisterNextPage> {
             Center(
               child: SelectedImage(
                   size: 96.0,
-                  image: _imageFile,
-                  onTap: _getImage
+                  image: _imageIcon,
+                  onTap: _getIcon
               ),
             ),
             Gaps.vGap8,
             Center(
               child: Text(
-                '点击添个人头像',
+                '点击添加个人头像',
                 style: Theme.of(context).textTheme.subtitle.copyWith(fontSize: Dimens.font_sp14),
               ),
             ),
@@ -224,6 +243,21 @@ class _RegisterNextState extends State<RegisterNextPage> {
                     ],
                   )
                 ]
+            ),
+            Gaps.vGap16,
+            Center(
+              child: SelectedImage(
+                  size: 96.0,
+                  image: _imageLicense,
+                  onTap: _getLicense
+              ),
+            ),
+            Gaps.vGap8,
+            Center(
+              child: Text(
+                '点击添加资质证明',
+                style: Theme.of(context).textTheme.subtitle.copyWith(fontSize: Dimens.font_sp14),
+              ),
             ),
             Gaps.vGap8,
           ],

@@ -9,6 +9,7 @@ class Constant {
   static const String data = 'result';
   static const String message = 'msg';
   static const String code = 'code';
+  static const String rows = 'rows';
 
   static const String jobfairList = 'jobfairList';
   static const String keynoteList = 'keynoteList';
@@ -27,4 +28,6 @@ class Constant {
 
   static const String theme = 'AppTheme';
 
+  static const int studentRid = 4;
+  static const int companyRid = 5;
 }

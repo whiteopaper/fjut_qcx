@@ -17,7 +17,8 @@ Job_fair_model _$Job_fair_modelFromJson(Map<String, dynamic> json) {
     ..worker_name = json['worker_name'] as String
     ..phone = json['phone'] as String
     ..publicity_state = json['publicity_state'] as String
-    ..click_count = json['click_count'] as String;
+    ..click_count = json['click_count'] as String
+    ..detail = json['detail'] as String;
 }
 
 Map<String, dynamic> _$Job_fair_modelToJson(Job_fair_model instance) =>
@@ -31,5 +32,6 @@ Map<String, dynamic> _$Job_fair_modelToJson(Job_fair_model instance) =>
       'worker_name': instance.worker_name,
       'phone': instance.phone,
       'publicity_state': instance.publicity_state,
-      'click_count': instance.click_count
+      'click_count': instance.click_count,
+      'detail': instance.detail
     };

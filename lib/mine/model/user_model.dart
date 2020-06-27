@@ -18,6 +18,8 @@ class UserModel {
     String introduction;
     String token;
     String deptName;
+    String icon_path;
+    String license_path;
     
     factory UserModel.fromJson(Map<String,dynamic> json) => _$UserModelFromJson(json);
     Map<String, dynamic> toJson() => _$UserModelToJson(this);

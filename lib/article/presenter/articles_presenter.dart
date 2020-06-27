@@ -20,7 +20,7 @@ class ArticlesPresenter extends BasePagePresenter<ArticlesListPageState> {
     Map<String, int> params = Map();
     params['page'] = provider.page;
     params['typeid'] = typeId;
-    params['type'] = 2;
+    params['type'] = 3;
     return request<ArticleModel>(Method.post,
       url: HttpApi.getArticle,
       params: params,
@@ -40,7 +40,6 @@ class ArticlesPresenter extends BasePagePresenter<ArticlesListPageState> {
           } else {
             provider.addAll(data);
           }
-          provider.increase();
           provider.toggle();
           if(onSuccess()!=null){
             onSuccess();

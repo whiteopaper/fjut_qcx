@@ -16,6 +16,7 @@ class Job_fair_model {
     String phone;
     String publicity_state;
     String click_count;
+    String detail;
     
     factory Job_fair_model.fromJson(Map<String,dynamic> json) => _$Job_fair_modelFromJson(json);
     Map<String, dynamic> toJson() => _$Job_fair_modelToJson(this);

@@ -10,6 +10,9 @@ ResumeModel _$Resume_modelFromJson(Map<String, dynamic> json) {
   return ResumeModel()
     ..id = json['id'] as String
     ..user_id = json['user_id'] as String
+    ..vsername = json['vsername'] as String
+    ..mobile = json['mobile'] as String
+    ..email = json['email'] as String
     ..intention_position = json['intention_position'] as String
     ..intention_city = json['intention_city'] as String
     ..intention_wages = json['intention_wages'] as String
@@ -24,13 +27,17 @@ ResumeModel _$Resume_modelFromJson(Map<String, dynamic> json) {
     ..honor_describe = json['honor_describe'] as String
     ..self_comment = json['self_comment'] as String
     ..create_time = json['create_time'] as String
-    ..visit_num = json['visit_num'] as num;
+    ..visit_num = json['visit_num'] as num
+    ..cid = json['cid'] as int;
 }
 
 Map<String, dynamic> _$Resume_modelToJson(ResumeModel instance) =>
     <String, dynamic>{
       'id': instance.id,
       'user_id': instance.user_id,
+      'vsername': instance.vsername,
+      'mobile': instance.mobile,
+      'email': instance.email,
       'intention_position': instance.intention_position,
       'intention_city': instance.intention_city,
       'intention_wages': instance.intention_wages,
@@ -45,5 +52,6 @@ Map<String, dynamic> _$Resume_modelToJson(ResumeModel instance) =>
       'honor_describe': instance.honor_describe,
       'self_comment': instance.self_comment,
       'create_time': instance.create_time,
-      'visit_num': instance.visit_num
+      'visit_num': instance.visit_num,
+      'cid': instance.cid,
     };

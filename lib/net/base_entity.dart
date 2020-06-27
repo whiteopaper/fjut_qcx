@@ -8,8 +8,8 @@ class BaseEntity<T> {
   int code;
   String message;
   T data;
+  List list = [];//树结构
   List<T> listData = [];
-  List list = [];
   Map<String, dynamic> mapData = {};
 
   BaseEntity(this.code, this.message, this.data);
@@ -23,11 +23,17 @@ class BaseEntity<T> {
     }
     if (json.containsKey(Constant.data)) {
       if (json[Constant.data] is List) {
+        list = json[Constant.data] as List;
         (json[Constant.data] as List).forEach((value) {
           listData.add(_generateOBJ<T>(value));
         });
       } else if (json[Constant.data] is Map) {
         mapData = (json[Constant.data] as Map);
+        if (mapData[Constant.rows] is List) {
+          (mapData[Constant.rows] as List).forEach((value) {
+            listData.add(_generateOBJ<T>(value));
+          });
+        }
       } else {
         data = _generateOBJ(json[Constant.data]);
       }

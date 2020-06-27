@@ -3,6 +3,7 @@ import 'dart:collection';
 
 class HttpApi{
   static const String baseUrl = 'http://47.115.150.4:8888';
+  static const String imageUrl = 'http://47.115.150.4:8088/';
   static const String jieyeUrl = 'https://jiuye.fjut.edu.cn/weixin.php/WechatMobileInterface';
   static const String login = '/rest/user/login';
   static const String logout = '/rest/user/logout';
@@ -10,17 +11,23 @@ class HttpApi{
   static const String modifyPersonalInfo = '/rest/user/modifyPersonalInfo';
   static const String userInfo = '/rest/user/info';
   static const String isRole = '/rest/user/isRole';
-
   static const String departments = '/rest/department/all';
+
+  static const String getResumes = '/rest/resume/list';
   static const String resumeQuery = '/rest/resume/info';
   static const String resumeAdd = '/rest/resume/add';
   static const String resumeUpdate = '/rest/resume/update';
   static const String resumeDelete = '/rest/resume/delete';
+  static const String resumeCollection = '/rest/resume/collection';
+  static const String resumeCancel = '/rest/resume/cancel';
 
-  static const String getResumes = '/rest/resume/list';
-  static const String getResumesDetail = '';
-  static const String getWorks = '/getArticle';
-  static const String getWorksDetail = '';
+  static const String getWorks = '/rest/work/list';
+  static const String workQuery = '/rest/work/info';
+  static const String workAdd = '/rest/work/add';
+  static const String workUpdate = '/rest/work/update';
+  static const String workDelete = '/rest/work/delete';
+  static const String workCollection = '/rest/work/collection';
+  static const String workCancel = '/rest/work/cancel';
 
   //学校api
   static const String jobfairList = '/jobfairList';
@@ -34,5 +41,6 @@ class HttpApi{
   static const String getArticle = '/getArticle';
   static const String getArticleDetail = 'https://jiuye.fjut.edu.cn/weixin.php/WechatMobileView/informationArticleDetail?type=2&id=';
 
-  static const String upload = 'uuc/upload-inco';
+  static const String uploadIcon = '/rest/upload/icon';
+  static const String uploadLicense = '/rest/upload/license';
 }
